@@ -44,7 +44,7 @@ public class Game{
 		}
 	}
 	public void sleep(int ms) {
-        try { new Thread().sleep(ms); } catch(InterruptedException e) {}
+        try { Thread.sleep(ms); } catch(InterruptedException e) {}
     }
 	public void loadPlatforms(){
 		//platforms.add(new Platform(325,140,50,50,this));
