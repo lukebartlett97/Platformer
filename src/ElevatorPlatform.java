@@ -120,11 +120,9 @@ public class ElevatorPlatform extends Platform{
 	public void checkTurn(){
 		if(moveX){
 			if(xVel > 0 && xPos>high){
-				System.out.println("Flip1");
 				xVel = -xVel;
 			}
 			else if (xVel < 0 && xPos<low){
-				System.out.println("Flip2");
 				xVel = -xVel;
 			}
 		}
