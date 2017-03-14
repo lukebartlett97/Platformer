@@ -12,6 +12,7 @@ public class Game{
 	int totalCoins = 0;
 	Player player;
 	boolean playing = true;
+	long startTime;
 	public Game(){
 		window = new JFrame("Platformer");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,10 +21,10 @@ public class Game{
 		player = new Player(1005,250,20,20, this);
 		Player.attach(player, panel);
 		window.setContentPane(panel);
-        window.pack();
-        window.setLocation(75,0);
-        window.setVisible(true);
-        loadPlatforms();
+		window.pack();
+		window.setLocation(75,0);
+		window.setVisible(true);
+		loadPlatforms();
 		mainLoop();
 	}
 	
@@ -34,7 +35,7 @@ public class Game{
 			}
 			player.update();
 			panel.repaint();
-			sleep(20);
+			sleep(15);
 		}
 		window.dispose();
 	}
@@ -44,8 +45,8 @@ public class Game{
 		}
 	}
 	public void sleep(int ms) {
-        try { Thread.sleep(ms); } catch(InterruptedException e) {}
-    }
+		try { Thread.sleep(ms); } catch(InterruptedException e) {}
+		}
 	public void loadPlatforms(){
 		//platforms.add(new Platform(325,140,50,50,this));
 		//platforms.add(new ElevatorPlatform(450,100,50,10,this, false, 100, 300, 2));

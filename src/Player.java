@@ -69,6 +69,9 @@ public class Player extends GameObject{
 		if(isDead()){
 			game.playing = false;
 		}
+		if(hasWon()){
+			//game.playing = false;
+		}
 	}
 	public void moveBy(int x, int y){
 		xPos += x;
@@ -124,6 +127,13 @@ public class Player extends GameObject{
 			if(platform.yPos>biggestY){biggestY = platform.yPos;}
 		}
 		if(yPos>biggestY+600){return true;}
+		return false;
+	}
+	
+	public boolean hasWon(){
+		if(game.totalCoins == coins){
+			return true;
+		}
 		return false;
 	}
 }

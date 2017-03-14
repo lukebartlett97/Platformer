@@ -36,6 +36,9 @@ public class GamePanel extends JPanel {
 	    g.setColor(Color.BLACK);
 	    g.fillRect(playerPos[0]-offsetX,playerPos[1]-offsetY,playerPos[2],playerPos[3]);
 	    g.drawString(Integer.toString(game.player.coins) + "/" + Integer.toString(game.totalCoins), 10, 20);
+	    if(game.player.hasWon()){
+	    	g.drawString("You Win!", 110, 20);
+	    }
 	}
 	        
 }
