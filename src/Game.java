@@ -30,8 +30,8 @@ public class Game{
 	
 	public void mainLoop(){
 		while(playing){
-			for(GameObject gameObject: platforms){
-				gameObject.update();
+			for(Platform platform: platforms){
+				platform.update();
 			}
 			player.update();
 			panel.repaint();

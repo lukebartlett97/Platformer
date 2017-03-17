@@ -23,60 +23,66 @@ public class ElevatorPlatform extends Platform{
 		if(moveX){
 			if(xVel>0){
 				if((playerPos[0] == xPos + width) && (playerPos[1] <= yPos + height) && playerPos[1] + playerPos[3] >= yPos){
-					yPos += yVel;
-					xPos += xVel;
-					posChanged = true;
-					if(game.player.clearRight()){
-						game.player.moveBy(xVel,yVel);
+					for(int i = 0; i<xVel; i++){
+						xPos += 1;
+						if(game.player.clearRight()){
+							game.player.moveBy(1,0);
+						}
 					}
+					posChanged = true;
 				}
 				else if((playerPos[1] + playerPos[3] == yPos) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					xPos += xVel;
-					yPos += yVel;
-					posChanged = true;
-					if(game.player.clearAbove()){
-						game.player.moveBy(xVel,yVel);
+					for(int i = 0; i<xVel; i++){
+						xPos += 1;
+						if(game.player.clearRight()){
+							game.player.moveBy(1,0);
+						}
 					}
+					posChanged = true;
 				}
 			}
 			else{
 				if((playerPos[0] + playerPos[2] == xPos) && (playerPos[1] <= yPos + height) && playerPos[1] + playerPos[3] >= yPos){
-					xPos += xVel;
-					yPos += yVel;
-					posChanged = true;
-					if(game.player.clearRight()){
-						game.player.moveBy(xVel,yVel);
+					for(int i = 0; i<-xVel; i++){
+						xPos -= 1;
+						if(game.player.clearLeft()){
+							game.player.moveBy(-1,0);
+						}
 					}
+					posChanged = true;
 				}
 				else if((playerPos[1] + playerPos[3] == yPos) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					xPos += xVel;
-					yPos += yVel;
-					posChanged = true;
-					if(game.player.clearAbove()){
-						game.player.moveBy(xVel,yVel);
+					for(int i = 0; i<-xVel; i++){
+						xPos -= 1;
+						if(game.player.clearLeft()){
+							game.player.moveBy(-1,0);
+						}
 					}
+					posChanged = true;
 				}
 			}
 		}
 		else{
 			if(yVel>0){
 				if((playerPos[1] == yPos + height ||(playerPos[1] + playerPos[3] == yPos)) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					xPos += xVel;
-					yPos += yVel;
-					posChanged = true;
-					if(game.player.clearBelow()){
-						game.player.moveBy(xVel,yVel);
+					for(int i = 0; i<yVel; i++){
+						yPos += 1;
+						if(game.player.clearBelow()){
+							game.player.moveBy(0,1);
+						}
 					}
+					posChanged = true;
 				}
 			}
 			else{
 				if((playerPos[1] + playerPos[3] == yPos) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					xPos += xVel;
-					yPos += yVel;
-					posChanged = true;
-					if(game.player.clearAbove()){
-						game.player.moveBy(xVel,yVel);
+					for(int i = 0; i<-yVel; i++){
+						yPos -= 1;
+						if(game.player.clearAbove()){
+							game.player.moveBy(0,-1);
+						}
 					}
+					posChanged = true;
 				}
 			}
 		}
