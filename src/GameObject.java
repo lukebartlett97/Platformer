@@ -13,7 +13,6 @@ public abstract class GameObject {
 		this.yVel = 0;
 		this.game = game;
 		this.color = color;
-		System.out.println(this.xPos + ", " + this.yPos + this.width + ", " + this.height);
 	}
 	public int getXPos(){
 		return xPos;

@@ -7,6 +7,7 @@ public class Coin extends GameObject{
 		this.yPos += 10;
 		this.width = this.width / 2;
 		this.height = this.height / 2;
+		game.totalCoins++;
 	}
 	public void update(){
 		;
