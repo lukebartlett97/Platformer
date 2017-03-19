@@ -29,6 +29,10 @@ public class Player extends GameObject{
     
 	public Player(int xPos, int yPos, int width, int height, Game game){
 		super(xPos,yPos,width,height, game, Color.BLACK);
+		this.xPos += 10;
+		this.yPos += 10;
+		this.width = this.width / 2;
+		this.height = this.height / 2;
 		keysPressed = new HashSet<Integer>();
 	}
 	public boolean falling(){
@@ -110,8 +114,7 @@ public class Player extends GameObject{
 		Iterator<Coin> iterator = game.coins.iterator();
 		while(iterator.hasNext()){
 			GameObject coin = iterator.next();
-			int[] coinPos = coin.getWholePos();
-			if((coinPos[0]<xPos+width) && (coinPos[0]+coinPos[2] > xPos) && (coinPos[1]<yPos+height) && (coinPos[1]+coinPos[3] > yPos)){
+			if((coin.getXPos()<xPos+width) && (coin.getXPos()+coin.getWidth() > xPos) && (coin.getYPos()<yPos+height) && (coin.getYPos()+coin.getHeight() > yPos)){
 				coins++;
 				iterator.remove();
 			}
@@ -127,11 +130,13 @@ public class Player extends GameObject{
 			if(platform.yPos>biggestY){biggestY = platform.yPos;}
 		}
 		if(yPos>biggestY+600){return true;}
+		if(game.maxTime - game.clock.seconds <= 0) {return true;}
 		return false;
 	}
 	
 	public boolean hasWon(){
 		if(game.totalCoins == coins){
+			game.clockTimer.cancel();
 			return true;
 		}
 		return false;

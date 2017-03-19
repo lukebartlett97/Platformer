@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.util.Timer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,18 +14,24 @@ public class Game{
 	Player player;
 	boolean playing = true;
 	long startTime;
+	Clock clock;
+	Timer clockTimer;
+	int maxTime = 60;
 	public Game(){
 		window = new JFrame("Platformer");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new GamePanel(this);
 		panel.setPreferredSize(new Dimension(1200,675));
-		player = new Player(1005,250,20,20, this);
+		player = new Player(25,6,1,1, this);
 		Player.attach(player, panel);
 		window.setContentPane(panel);
 		window.pack();
 		window.setLocation(75,0);
 		window.setVisible(true);
 		loadPlatforms();
+		clock = new Clock();
+		clockTimer = new Timer();
+		clockTimer.scheduleAtFixedRate(clock, 1000,1000);
 		mainLoop();
 	}
 	
@@ -53,125 +60,125 @@ public class Game{
 		//coins.add(new Coin(345,125,10,10,this));
 		
 		//Top left coin and platform
-		coins.add(new Coin(10,10,20,20,this));
+		coins.add(new Coin(0,0,1,1,this));
 		totalCoins++;
-		platforms.add(new Platform(0,40,80,40,this));
+		platforms.add(new Platform(0,1,2,1,this));
 		
 		//Platform and X-Lift leading to coin
-		platforms.add(new ElevatorPlatform(120,120,80,40,this, true, 120, 400, 2));
-		platforms.add(new Platform(440,240,160,40,this));
+		platforms.add(new ElevatorPlatform(3,3,2,1,this, true, 3, 10, 2));
+		platforms.add(new Platform(11,6,4,1,this));
 		
 		//Stairs
-		platforms.add(new Platform(720,280,40,160,this));
-		platforms.add(new Platform(760,320,40,120,this));
-		platforms.add(new Platform(800,360,40,80,this));
-		platforms.add(new Platform(840,400,40,40,this));
+		platforms.add(new Platform(18,7,1,4,this));
+		platforms.add(new Platform(19,8,1,3,this));
+		platforms.add(new Platform(20,9,1,2,this));
+		platforms.add(new Platform(21,10,1,1,this));
 		
 		//U-Shape
-		platforms.add(new Platform(80,320,40,80,this));
-		platforms.add(new Platform(80,400,200,40,this));
-		platforms.add(new Platform(240,320,40,80,this));
-		coins.add(new Coin(170,370,20,20,this));
+		platforms.add(new Platform(2,8,1,2,this));
+		platforms.add(new Platform(2,10,5,1,this));
+		platforms.add(new Platform(6,8,1,2,this));
+		coins.add(new Coin(4,9,1,1,this));
 		totalCoins++;
 		
 		//Y-Lift by U-Shape
-		platforms.add(new ElevatorPlatform(320,360,120,40,this, false, 360, 640, 2));
+		platforms.add(new ElevatorPlatform(8,9,3,1,this, false, 9, 16, 2));
 		
 		//Platform and coin under Y-Lift
-		coins.add(new Coin(370,770,20,20,this));
+		coins.add(new Coin(9,19,1,1,this));
 		totalCoins++;
-		platforms.add(new Platform(320,800,120,40,this));
+		platforms.add(new Platform(8,20,3,1,this));
 		
 		//Line under U-Shape
-		platforms.add(new Platform(160,440,40,40,this));
-		platforms.add(new Platform(160,520,40,280,this));
+		platforms.add(new Platform(4,11,1,1,this));
+		platforms.add(new Platform(4,13,1,7,this));
 		
 		//2 mini platforms on left with coin
-		platforms.add(new Platform(0,400,80,40,this));
-		platforms.add(new Platform(0,440,40,240,this));
-		coins.add(new Coin(50,650,20,20,this));
+		platforms.add(new Platform(0,10,2,1,this));
+		platforms.add(new Platform(0,11,1,6,this));
+		coins.add(new Coin(1,16,1,1,this));
 		totalCoins++;
-		platforms.add(new Platform(0,680,80,40,this));
-		platforms.add(new Platform(0,800,80,40,this));
+		platforms.add(new Platform(0,17,2,1,this));
+		platforms.add(new Platform(0,20,2,1,this));
 		
 		//X-Lift at bottom left
-		platforms.add(new ElevatorPlatform(0,960,120,40,this, true, 0, 480, 2));
+		platforms.add(new ElevatorPlatform(0,24,3,1,this, true, 0, 12, 2));
 		
 		//Staircase leading up from bottom left with under-stairs coin
-		platforms.add(new Platform(560,880,80,40,this));
-		platforms.add(new Platform(640,760,80,40,this));
-		platforms.add(new Platform(720,640,80,40,this));
-		coins.add(new Coin(770,450,20,20,this));
+		platforms.add(new Platform(14,22,2,1,this));
+		platforms.add(new Platform(16,19,2,1,this));
+		platforms.add(new Platform(18,16,2,1,this));
+		coins.add(new Coin(19,11,1,1,this));
 		totalCoins++;
 		
 		//Y-Lift left of start and adjacent X-Lift
-		platforms.add(new ElevatorPlatform(880,600,80,40,this, false, 600, 960, 2));
-		platforms.add(new ElevatorPlatform(1080,800,120,40,this, true, 1080, 1280, 2));
+		platforms.add(new ElevatorPlatform(22,15,2,1,this, false, 15, 24, 2));
+		platforms.add(new ElevatorPlatform(27,20,3,1,this, true, 27, 32, 2));
 		
 		//Path and crusher
-		platforms.add(new Platform(880,1040,160,40,this));
-		platforms.add(new Platform(1000,1080,80,40,this));
-		platforms.add(new Platform(1040,1120,80,40,this));
-		platforms.add(new Platform(1080,1160,240,40,this));
-		platforms.add(new Platform(1320,1000,40,200,this));
-		platforms.add(new ElevatorPlatform(1240,1120,80,40,this, false, 1000, 1120, -2));
+		platforms.add(new Platform(22,26,4,1,this));
+		platforms.add(new Platform(25,27,2,1,this));
+		platforms.add(new Platform(26,28,2,1,this));
+		platforms.add(new Platform(27,29,6,1,this));
+		platforms.add(new Platform(33,25,1,5,this));
+		platforms.add(new ElevatorPlatform(31,28,2,1,this, false, 25, 28, -2));
 		
 		//Platform right of start
-		coins.add(new Coin(1170,410,20,20,this));
+		coins.add(new Coin(29,10,1,1,this));
 		totalCoins++;
-		platforms.add(new Platform(1080,440,200,40,this));
+		platforms.add(new Platform(27,11,5,1,this));
 		
 		//Y-Lift right of start
-		platforms.add(new ElevatorPlatform(1300,480,80,40,this, false, 120, 720, -4));
+		platforms.add(new ElevatorPlatform(33,12,2,1,this, false, 3, 18, -4));
 		
 		//Top Left of Maze: 1400, 440
-		platforms.add(new Platform(1400,440,40,320,this));
-		platforms.add(new Platform(1440,560,120,40,this));
-		platforms.add(new Platform(1440,720,280,40,this));
-		platforms.add(new Platform(1480,640,160,40,this));
-		platforms.add(new Platform(1600,440,40,160,this));
-		platforms.add(new Platform(1640,560,40,40,this));
-		platforms.add(new Platform(1600,600,200,40,this));
-		platforms.add(new Platform(1680,680,40,40,this));
-		coins.add(new Coin(1690,650,20,20,this));
+		platforms.add(new Platform(35,11,1,8,this));
+		platforms.add(new Platform(36,14,3,1,this));
+		platforms.add(new Platform(36,18,7,1,this));
+		platforms.add(new Platform(37,16,4,1,this));
+		platforms.add(new Platform(40,11,1,4,this));
+		platforms.add(new Platform(41,14,1,1,this));
+		platforms.add(new Platform(40,15,5,1,this));
+		platforms.add(new Platform(42,17,1,1,this));
+		coins.add(new Coin(42,16,1,1,this));
 		totalCoins++;
-		platforms.add(new Platform(1760,640,40,120,this));
+		platforms.add(new Platform(44,16,1,3,this));
 		
 		//Islands Around maze
-		platforms.add(new Platform(1400,880,160,40,this));
-		platforms.add(new Platform(1680,840,120,40,this));
-		platforms.add(new Platform(1880,760,80,40,this));
-		platforms.add(new Platform(1840,640,80,40,this));
-		platforms.add(new Platform(2080,720,40,40,this));
-		platforms.add(new Platform(2240,720,40,40,this));
-		platforms.add(new Platform(2360,640,40,40,this));
-		coins.add(new Coin(2410,530,20,20,this));
+		platforms.add(new Platform(35,22,4,1,this));
+		platforms.add(new Platform(42,21,3,1,this));
+		platforms.add(new Platform(47,19,2,1,this));
+		platforms.add(new Platform(46,16,2,1,this));
+		platforms.add(new Platform(52,18,1,1,this));
+		platforms.add(new Platform(56,18,1,1,this));
+		platforms.add(new Platform(59,16,1,1,this));
+		coins.add(new Coin(60,13,1,1,this));
 		totalCoins++;
 		
 		//Platform above start
-		coins.add(new Coin(1010,10,20,20,this));
+		coins.add(new Coin(25,0,1,1,this));
 		totalCoins++;
-		platforms.add(new Platform(960,40,200,40,this));
-		platforms.add(new Platform(1120,80,160,40,this));
+		platforms.add(new Platform(24,1,5,1,this));
+		platforms.add(new Platform(28,2,4,1,this));
 		
 		//Platform left of top Y-Lift
-		platforms.add(new Platform(1520,120,160,40,this));
+		platforms.add(new Platform(38,3,4,1,this));
 		
 		//Moving Stairs
-		platforms.add(new ElevatorPlatform(1840,160,40,40,this, false, 160, 400, 2));
-		platforms.add(new ElevatorPlatform(1880,120,40,80,this, false, 120, 360, 2));
-		platforms.add(new ElevatorPlatform(1920,80,40,80,this, false, 80, 320, 2));
-		platforms.add(new ElevatorPlatform(1960,40,40,80,this, false, 40, 280, 2));
-		platforms.add(new ElevatorPlatform(2000,0,40,80,this, false, 0, 240, 2));
+		platforms.add(new ElevatorPlatform(46,4,1,1,this, false, 4, 10, 2));
+		platforms.add(new ElevatorPlatform(47,3,1,2,this, false, 3, 9, 2));
+		platforms.add(new ElevatorPlatform(48,2,1,2,this, false, 2, 8, 2));
+		platforms.add(new ElevatorPlatform(49,1,1,2,this, false, 1, 7, 2));
+		platforms.add(new ElevatorPlatform(50,0,1,2,this, false, 0, 6, 2));
 		
 		//Top right coin platform
-		platforms.add(new Platform(2120,120,120,40,this));
-		platforms.add(new Platform(2200,40,40,80,this));
-		coins.add(new Coin(2170,90,20,20,this));
+		platforms.add(new Platform(53,3,3,1,this));
+		platforms.add(new Platform(55,1,1,2,this));
+		coins.add(new Coin(54,2,1,1,this));
 		totalCoins++;
 		
 		
 		//Starting Platform
-		platforms.add(new Platform(960,320,120,40,this));
+		platforms.add(new Platform(24,8,3,1,this));
 		}
 }

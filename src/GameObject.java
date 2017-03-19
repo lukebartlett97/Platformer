@@ -5,19 +5,27 @@ public abstract class GameObject {
 	protected Game game;
 	public Color color;
 	public GameObject(int xPos, int yPos, int width, int height, Game game, Color color){
-		this.xPos = xPos;
-		this.yPos = yPos;
-		this.width = width;
-		this.height = height;
+		this.xPos = xPos * 40;
+		this.yPos = yPos * 40;
+		this.width = width * 40;
+		this.height = height * 40;
 		this.xVel = 0;
 		this.yVel = 0;
 		this.game = game;
 		this.color = color;
+		System.out.println(this.xPos + ", " + this.yPos + this.width + ", " + this.height);
 	}
-	
-	public int[] getWholePos(){
-		int[] wholePos = {xPos,yPos,width,height};
-		return wholePos;
+	public int getXPos(){
+		return xPos;
+	}
+	public int getYPos(){
+		return yPos;
+	}
+	public int getWidth(){
+		return width;
+	}
+	public int getHeight(){
+		return height;
 	}
 	
 	public void accelerate(int x, int y){

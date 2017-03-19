@@ -12,117 +12,67 @@ public class ElevatorPlatform extends Platform{
 			xVel = 0;
 			yVel = speed;
 		}
-		this.low = low;
-		this.high = high;
+		this.low = low * 40;
+		this.high = high * 40;
 		this.moveX = moveX;
 	}
 	@Override
 	public void update(){
-		boolean posChanged = false;
-		int[] playerPos = game.player.getWholePos();
 		if(moveX){
 			if(xVel>0){
-				if((playerPos[0] == xPos + width) && (playerPos[1] <= yPos + height) && playerPos[1] + playerPos[3] >= yPos){
-					for(int i = 0; i<xVel; i++){
+				for(int i = 0; i<xVel; i++){
+					if(((game.player.getXPos() == xPos + width) && (game.player.getYPos() <= yPos + height) && game.player.getYPos() + game.player.getHeight() >= yPos) ||
+					((game.player.getYPos() + game.player.getHeight() == yPos) && (game.player.getXPos() <= xPos + width) && game.player.getXPos() + game.player.getWidth() >= xPos)){
 						xPos += 1;
 						if(game.player.clearRight()){
 							game.player.moveBy(1,0);
 						}
 					}
-					posChanged = true;
+					else {xPos += 1;}
 				}
-				else if((playerPos[1] + playerPos[3] == yPos) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					for(int i = 0; i<xVel; i++){
-						xPos += 1;
-						if(game.player.clearRight()){
-							game.player.moveBy(1,0);
-						}
-					}
-					posChanged = true;
-				}
+				
 			}
 			else{
-				if((playerPos[0] + playerPos[2] == xPos) && (playerPos[1] <= yPos + height) && playerPos[1] + playerPos[3] >= yPos){
-					for(int i = 0; i<-xVel; i++){
+				for(int i = 0; i<-xVel; i++){
+					if(((game.player.getXPos() + game.player.getWidth() == xPos) && (game.player.getYPos() <= yPos + height) && game.player.getYPos() + game.player.getHeight() >= yPos) ||
+					((game.player.getYPos() + game.player.getHeight() == yPos) && (game.player.getXPos() <= xPos + width) && game.player.getXPos() + game.player.getWidth() >= xPos)){
 						xPos -= 1;
 						if(game.player.clearLeft()){
 							game.player.moveBy(-1,0);
 						}
 					}
-					posChanged = true;
-				}
-				else if((playerPos[1] + playerPos[3] == yPos) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					for(int i = 0; i<-xVel; i++){
-						xPos -= 1;
-						if(game.player.clearLeft()){
-							game.player.moveBy(-1,0);
-						}
-					}
-					posChanged = true;
+					else {xPos -= 1;}
 				}
 			}
 		}
 		else{
 			if(yVel>0){
-				if((playerPos[1] == yPos + height ||(playerPos[1] + playerPos[3] == yPos)) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					for(int i = 0; i<yVel; i++){
+				for(int i = 0; i<yVel; i++){
+					if((game.player.getYPos() == yPos + height ||(game.player.getYPos() + game.player.getHeight() == yPos)) && (game.player.getXPos() <= xPos + width) && game.player.getXPos() + game.player.getWidth() >= xPos){
 						yPos += 1;
 						if(game.player.clearBelow()){
 							game.player.moveBy(0,1);
 						}
 					}
-					posChanged = true;
+					else {yPos += 1;}
+					
 				}
 			}
 			else{
-				if((playerPos[1] + playerPos[3] == yPos) && (playerPos[0] <= xPos + width) && playerPos[0] + playerPos[2] >= xPos){
-					for(int i = 0; i<-yVel; i++){
+				for(int i = 0; i<(-yVel); i++){
+					if((game.player.getYPos() + game.player.getHeight() == yPos) && (game.player.getXPos() <= xPos + width) && game.player.getXPos() + game.player.getWidth() >= xPos){
 						yPos -= 1;
 						if(game.player.clearAbove()){
 							game.player.moveBy(0,-1);
 						}
 					}
-					posChanged = true;
+					else {yPos -= 1;}
 				}
 			}
 		}
-		if(!posChanged){
-			xPos += xVel;
-			yPos += yVel;
-		}
 		checkTurn();
 	}
-	/*
-	@Override
-	public void update(){
-		boolean posChanged = false;
-		int[] playerPos = game.player.getWholePos();
-		if(playerPos[1] + playerPos[3] == yPos){
-			if((playerPos[0] < xPos + width) && playerPos[0] + playerPos[2] > xPos){
-				xPos += xVel;
-				yPos += yVel;
-				posChanged = true;
-				if(yVel>0 && game.player.clearBelow()){
-					game.player.moveBy(xVel,yVel);
-				}
-				else if(yVel<0 && game.player.clearAbove()){
-					game.player.moveBy(xVel,yVel);
-				}
-				else if(xVel>0 && game.player.clearRight()){
-					game.player.moveBy(xVel,yVel);
-				}
-				else if(xVel<0 && game.player.clearLeft()){
-					game.player.moveBy(xVel,yVel);
-				}
-			}
-		}
-		if(!posChanged){
-			xPos += xVel;
-			yPos += yVel;
-		}
-		checkTurn();
-	}
-	*/
+	
 	public void checkTurn(){
 		if(moveX){
 			if(xVel > 0 && xPos>high){

@@ -18,26 +18,24 @@ public class GamePanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(font);
 	    setBackground(Color.WHITE);
-    	int[] playerPos = game.player.getWholePos();
-    	int offsetX = -600 - playerPos[2] + playerPos[0];
-    	int offsetY = -332 - playerPos[3] + playerPos[1];
+    	int offsetX = -600 - game.player.getWidth() + game.player.getXPos();
+    	int offsetY = -332 - game.player.getHeight() + game.player.getYPos();
 	    g.setColor(Color.BLACK);
 	    for(Platform platform : game.platforms){
-	    	int[] objectPos = platform.getWholePos();
-	    	g.fillRect(objectPos[0]-offsetX,objectPos[1]-offsetY,objectPos[2],objectPos[3]);
+	    	g.fillRect(platform.getXPos()-offsetX,platform.getYPos()-offsetY,platform.getWidth(),platform.getHeight());
 	    }
 	    for(Coin coin : game.coins){
-	    	int[] objectPos = coin.getWholePos();
 		    g.setColor(Color.BLACK);
-	    	g.fillRect(objectPos[0]-offsetX,objectPos[1]-offsetY,objectPos[2],objectPos[3]);
+	    	g.fillRect(coin.getXPos()-offsetX,coin.getYPos()-offsetY,coin.getWidth(),coin.getHeight());
 		    g.setColor(Color.YELLOW);
-	    	g.fillRect(objectPos[0]-offsetX+1,objectPos[1]-offsetY+1,objectPos[2]-2,objectPos[3]-2);
+	    	g.fillRect(coin.getXPos()-offsetX+1,coin.getYPos()-offsetY+1,coin.getWidth()-2,coin.getHeight()-2);
 	    }
 	    g.setColor(Color.BLACK);
-	    g.fillRect(playerPos[0]-offsetX,playerPos[1]-offsetY,playerPos[2],playerPos[3]);
+	    g.fillRect(game.player.getXPos()-offsetX,game.player.getYPos()-offsetY,game.player.getWidth(),game.player.getHeight());
 	    g.drawString(Integer.toString(game.player.coins) + "/" + Integer.toString(game.totalCoins), 10, 20);
+	    g.drawString(Integer.toString(game.maxTime - game.clock.seconds), 110, 20);
 	    if(game.player.hasWon()){
-	    	g.drawString("You Win!", 110, 20);
+	    	g.drawString("You Win!", 160, 20);
 	    }
 	}
 	        
