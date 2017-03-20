@@ -6,6 +6,7 @@ public class LoadMap {
 		//game.coins.add(new Coin(345,125,10,10,game));
 		
 		//Top left coin and platform
+		game.player.setStart(25,6);
 		game.coins.add(new Coin(0,0,1,1,game));
 		
 		game.platforms.add(new Platform(0,1,2,1,game));
@@ -126,5 +127,90 @@ public class LoadMap {
 		
 		//Starting Platform
 		game.platforms.add(new Platform(24,8,3,1,game));
+	}
+	public static void map2(Game game){
+		game.player.setStart(2,3);
+		game.platforms.add(new Platform(0,-39,90,40,game));
+		game.platforms.add(new Platform(0,5,90,40,game));
+		game.platforms.add(new Platform(-39,-39,40,85,game));
+		game.killers.add(new Killer(6,4,1,1,game));
+		
+		game.platforms.add(new ElevatorPlatform(8,1,2,1,game, false, 1, 4, 2));
+		game.coins.add(new Coin(10,4,1,1,game));
+		
+		game.killers.add(new Killer(12,4,1,1,game));
+		game.killers.add(new Killer(13,4,1,1,game));
+		game.killers.add(new Killer(14,4,1,1,game));
+		game.killers.add(new Killer(15,4,1,1,game));
+		game.killers.add(new Killer(16,4,1,1,game));
+		game.killers.add(new Killer(17,4,1,1,game));
+		game.killers.add(new Killer(18,4,1,1,game));
+		game.platforms.add(new ElevatorPlatform(12,3,1,1,game, true, 12, 18, 2));
+		game.coins.add(new Coin(15,2,1,1,game));
+
+		game.platforms.add(new Platform(22,4,1,1,game));
+		game.killers.add(new Killer(23,4,1,1,game));
+		game.coins.add(new Coin(24,4,1,1,game));
+		game.killers.add(new Killer(25,4,1,1,game));
+		game.platforms.add(new Platform(26,4,1,1,game));
+		
+		game.killers.add(new Killer(29,4,1,1,game));
+		game.killers.add(new Killer(30,3,1,1,game));
+		game.killers.add(new Killer(31,2,1,1,game));
+		game.killers.add(new Killer(33,1,1,1,game));
+		game.killers.add(new Killer(33,2,1,1,game));
+		game.killers.add(new Killer(33,3,1,1,game));
+		game.coins.add(new Coin(31,4,1,1,game));
+
+		game.platforms.add(new Platform(36,1,4,2,game));
+		game.platforms.add(new Platform(42,3,4,2,game));
+		game.platforms.add(new ElevatorPlatform(36,3,1,2,game, true, 36, 41, 2));
+		game.coins.add(new Coin(43,2,1,1,game));
+
+		game.platforms.add(new ElevatorPlatform(48,1,2,1,game, false, 1, 4, 4));
+		game.platforms.add(new ElevatorPlatform(50,4,2,1,game, false, 1, 4, 4));
+		game.platforms.add(new ElevatorPlatform(52,1,2,1,game, false, 1, 4, 4));
+		game.platforms.add(new ElevatorPlatform(54,4,2,1,game, false, 1, 4, 4));
+		game.platforms.add(new ElevatorPlatform(56,1,2,1,game, false, 1, 4, 4));
+		game.coins.add(new Coin(59,3,1,1,game));
+
+		game.platforms.add(new Platform(61,1,1,3,game));
+		game.platforms.add(new Platform(62,3,1,1,game));
+		game.platforms.add(new Platform(64,3,3,2,game));
+		game.platforms.add(new Platform(68,1,1,2,game));
+		game.platforms.add(new ElevatorPlatform(62,1,1,2,game, true, 62, 67, 2));
+		game.coins.add(new Coin(68,4,1,1,game));
+
+		game.platforms.add(new Platform(71,2,1,3,game));
+		game.killers.add(new Killer(72,4,1,1,game));
+		game.platforms.add(new Platform(73,2,1,3,game));
+		game.coins.add(new Coin(74,4,1,1,game));
+		game.platforms.add(new Platform(75,2,1,3,game));
+		game.killers.add(new Killer(76,4,1,1,game));
+		game.platforms.add(new Platform(77,2,1,3,game));
+		
+
+		game.killers.add(new Killer(80,1,1,1,game));
+		game.killers.add(new Killer(80,2,1,1,game));
+		game.killers.add(new Killer(80,3,1,1,game));
+		game.coins.add(new Coin(82,1,1,1,game));
+		game.killers.add(new Killer(82,3,1,1,game));
+		game.killers.add(new Killer(82,4,1,1,game));
+		game.killers.add(new Killer(84,1,1,1,game));
+		game.killers.add(new Killer(84,2,1,1,game));
+		game.killers.add(new Killer(84,3,1,1,game));
+
+		game.killers.add(new Killer(90,4,1,1,game));
+		game.killers.add(new Killer(91,3,1,1,game));
+		game.killers.add(new Killer(92,2,1,1,game));
+		game.killers.add(new Killer(93,3,1,1,game));
+		game.killers.add(new Killer(93,4,1,1,game));
+		game.killers.add(new Killer(95,0,1,1,game));
+		game.killers.add(new Killer(96,1,1,1,game));
+		game.killers.add(new Killer(97,2,1,1,game));
+		game.killers.add(new Killer(97,3,1,1,game));
+		game.killers.add(new Killer(97,4,1,1,game));
+		game.coins.add(new Coin(95,4,1,1,game));
+		game.platforms.add(new Platform(94,5,3,1,game));
 	}
 }

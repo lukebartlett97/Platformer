@@ -11,6 +11,7 @@ public class Game{
 	JPanel panel = null;
 	List<Platform> platforms = new ArrayList<>();
 	List<Coin> coins = new ArrayList<>();
+	List<Killer> killers = new ArrayList<>();
 	int totalCoins = 0;
 	Player player;
 	boolean playing = true;
@@ -29,7 +30,7 @@ public class Game{
 		window.pack();
 		window.setLocation(75,0);
 		window.setVisible(true);
-		LoadMap.map1(this);
+		LoadMap.map2(this);
 		clock = new Clock();
 		clockTimer = new Timer();
 		clockTimer.scheduleAtFixedRate(clock, 1000,1000);

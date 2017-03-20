@@ -120,7 +120,10 @@ public class Player extends GameObject{
 			}
 		}
 	}
-	
+	public void setStart(int x, int y){
+		this.xPos = x * 40 + 10;
+		this.yPos = x * 40 + 10;
+	}
 	public boolean isDead(){
 		if(!clearBelow() && !clearAbove()){
 			return true;
@@ -131,6 +134,14 @@ public class Player extends GameObject{
 		}
 		if(yPos>biggestY+600){return true;}
 		if(game.maxTime - game.clock.seconds <= 0) {return true;}
+		for(Killer killer : game.killers){
+			if(game.player.getXPos() < killer.getXPos() + killer.getWidth() &&
+					game.player.getXPos() + game.player.getWidth() > killer.getXPos() &&
+					game.player.getYPos() < killer.getYPos() + killer.getHeight() &&
+					game.player.getYPos() + game.player.getHeight() > killer.getYPos()){
+				return true;
+			}
+		}
 		return false;
 	}
 	

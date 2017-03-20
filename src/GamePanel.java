@@ -30,8 +30,16 @@ public class GamePanel extends JPanel {
 		    g.setColor(Color.YELLOW);
 	    	g.fillRect((int) (coin.getXPos()*Game.sizeMultiplier-offsetX+1),(int) (coin.getYPos()*Game.sizeMultiplier-offsetY+1),(int) (coin.getWidth()*Game.sizeMultiplier-2),(int) (coin.getHeight()*Game.sizeMultiplier-2));
 	    }
+	    for(Killer killer : game.killers){
+		    g.setColor(Color.BLACK);
+	    	g.fillRect((int) (killer.getXPos()*Game.sizeMultiplier-offsetX),(int) (killer.getYPos()*Game.sizeMultiplier-offsetY),(int) (killer.getWidth()*Game.sizeMultiplier),(int) (killer.getHeight()*Game.sizeMultiplier));
+		    g.setColor(Color.RED);
+	    	g.fillRect((int) (killer.getXPos()*Game.sizeMultiplier-offsetX+1),(int) (killer.getYPos()*Game.sizeMultiplier-offsetY+1),(int) (killer.getWidth()*Game.sizeMultiplier-2),(int) (killer.getHeight()*Game.sizeMultiplier-2));
+	    }
 	    g.setColor(Color.BLACK);
 	    g.fillRect((int) (game.player.getXPos()*Game.sizeMultiplier-offsetX),(int) (game.player.getYPos()*Game.sizeMultiplier-offsetY),(int) (game.player.getWidth()*Game.sizeMultiplier),(int) (game.player.getHeight()*Game.sizeMultiplier));
+
+	    g.setColor(Color.GRAY);
 	    g.drawString(Integer.toString(game.player.coins) + "/" + Integer.toString(game.totalCoins), 10, 20);
 	    g.drawString(Integer.toString(game.maxTime - game.clock.seconds), 110, 20);
 	    if(game.player.hasWon()){
