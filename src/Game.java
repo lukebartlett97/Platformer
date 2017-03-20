@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 public class Game{
+	static final double sizeMultiplier = 1;
 	JFrame window = null;
 	JPanel panel = null;
 	List<Platform> platforms = new ArrayList<>();
@@ -16,7 +17,7 @@ public class Game{
 	long startTime;
 	Clock clock;
 	Timer clockTimer;
-	int maxTime = 60;
+	int maxTime = 90;
 	public Game(){
 		window = new JFrame("Platformer");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
