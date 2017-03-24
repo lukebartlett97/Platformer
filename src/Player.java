@@ -36,18 +36,18 @@ public class Player extends GameObject{
 		keysPressed = new HashSet<Integer>();
 	}
 	public boolean falling(){
-		return clearBelow();
+		if(game.gravity>0){return clearBelow();} else {return clearAbove();}
 	}
 	public void update(){
 		if(falling()){
 			if(fallingCount++ == 3){
-				accelerate(0,1);
+				accelerate(0,1*game.gravity);
 				fallingCount = 0;
 			}
 		}
 		if(keysPressed.contains(KeyEvent.VK_UP)){
 			if(!falling()){
-				yVel = -8;
+				yVel = -8 * game.gravity;
 			}
 		}
 		int direction = 0;
@@ -56,6 +56,10 @@ public class Player extends GameObject{
 		}
 		if(keysPressed.contains(KeyEvent.VK_RIGHT)){
 			direction += 2;
+		}
+		if(keysPressed.contains(KeyEvent.VK_ESCAPE)){
+			game.won = true;
+			game.playing = false;
 		}
 		switch(direction){
 		case 1:
@@ -69,40 +73,57 @@ public class Player extends GameObject{
 			else if(xVel<0){xVel += 1;}
 		}
 		move();
-		collectCoins();
 		if(isDead()){
 			game.playing = false;
 		}
 		if(hasWon()){
-			//game.playing = false;
+			game.won = true;
+			game.playing = false;
+		}
+	}
+	public void teleport(){
+		for(Teleporter teleporter : game.teleporters){
+			if((teleporter.getXPos()<xPos+width) && (teleporter.getXPos()+teleporter.getWidth() > xPos) && (teleporter.getYPos()<yPos+height) && (teleporter.getYPos()+teleporter.getHeight() > yPos)){
+				moveTo(teleporter.targetX, teleporter.targetY);
+			}
 		}
 	}
 	public void moveBy(int x, int y){
 		xPos += x;
 		yPos += y;
+		collectCoins();
+		teleport();
 	}
 	public void move(){
 		if(yVel>0){
 			for(int i = 0; i<yVel; i++){
-				if(clearBelow()){yPos += 1;}
+				if(clearBelow()){yPos += 1;
+				collectCoins();
+				teleport();}
 				else{yVel = 0;}
 			}
 		}
 		else if(yVel<0){
 			for(int i = 0; i<-yVel; i++){
-				if(clearAbove()){yPos += -1;}	
+				if(clearAbove()){yPos += -1;
+				collectCoins();
+				teleport();}	
 				else{yVel = 0;}		
 			}			
 		}
 		if(xVel<0){
 			for(int i = 0; i<-xVel; i++){
-				if(clearLeft()){xPos += -1;}	
+				if(clearLeft()){xPos += -1;
+				collectCoins();
+				teleport();}	
 				else{xVel = 0;}	
 			}
 		}
 		else if(xVel>0){
 			for(int i = 0; i<xVel; i++){
-				if(clearRight()){xPos += 1;}	
+				if(clearRight()){xPos += 1;
+				collectCoins();
+				teleport();}	
 				else{
 					xVel = 0;
 				}	
@@ -120,12 +141,12 @@ public class Player extends GameObject{
 			}
 		}
 	}
-	public void setStart(int x, int y){
+	public void moveTo(int x, int y){
 		this.xPos = x * 40 + 10;
-		this.yPos = x * 40 + 10;
+		this.yPos = y * 40 + 10;
 	}
 	public boolean isDead(){
-		if(!clearBelow() && !clearAbove()){
+		if((!clearBelow() && !clearAbove()) || (!clearLeft() && !clearRight())){
 			return true;
 		}
 		int biggestY = 0;

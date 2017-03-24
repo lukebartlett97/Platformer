@@ -6,7 +6,7 @@ public class LoadMap {
 		//game.coins.add(new Coin(345,125,10,10,game));
 		
 		//Top left coin and platform
-		game.player.setStart(25,6);
+		game.player.moveTo(25,6);
 		game.coins.add(new Coin(0,0,1,1,game));
 		
 		game.platforms.add(new Platform(0,1,2,1,game));
@@ -129,7 +129,8 @@ public class LoadMap {
 		game.platforms.add(new Platform(24,8,3,1,game));
 	}
 	public static void map2(Game game){
-		game.player.setStart(2,3);
+		game.player.moveTo(2,3);
+		//game.teleporters.add(new Teleporter(3,3,1,1,game,3,1));
 		game.platforms.add(new Platform(0,-39,90,40,game));
 		game.platforms.add(new Platform(0,5,90,40,game));
 		game.platforms.add(new Platform(-39,-39,40,85,game));
@@ -212,5 +213,112 @@ public class LoadMap {
 		game.killers.add(new Killer(97,4,1,1,game));
 		game.coins.add(new Coin(95,4,1,1,game));
 		game.platforms.add(new Platform(94,5,3,1,game));
+	}
+	public static void map3(Game game){
+		game.player.moveTo(15,14);
+		
+		//Edges
+		game.platforms.add(new Platform(-40,-40,68,41,game));
+		game.platforms.add(new Platform(-40,28,68,41,game));
+		game.platforms.add(new Platform(-40,1,41,27,game));
+		game.platforms.add(new Platform(27,-40,41,108,game));
+		
+		//Coins
+		game.coins.add(new Coin(4,3,1,1,game));
+		game.coins.add(new Coin(17,3,1,1,game));
+		game.coins.add(new Coin(25,4,1,1,game));
+		game.coins.add(new Coin(17,7,1,1,game));
+		game.coins.add(new Coin(2,9,1,1,game));
+		game.coins.add(new Coin(13,18,1,1,game));
+		game.coins.add(new Coin(21,20,1,1,game));
+		game.coins.add(new Coin(4,22,1,1,game));
+		game.coins.add(new Coin(13,23,1,1,game));
+		game.coins.add(new Coin(14,26,1,1,game));
+		
+		//Teleporters
+		game.teleporters.add(new Teleporter(25,1,1,1,game,15,13));
+		game.teleporters.add(new Teleporter(2,2,1,1,game,15,13));
+		game.teleporters.add(new Teleporter(14,2,1,1,game,21,14));
+		game.teleporters.add(new Teleporter(2,6,1,1,game,10,6));
+		game.teleporters.add(new Teleporter(13,13,1,1,game,14,6));
+		game.teleporters.add(new Teleporter(17,13,1,1,game,13,10));
+		game.teleporters.add(new Teleporter(11,22,1,1,game,15,13));
+		game.teleporters.add(new Teleporter(2,26,1,1,game,15,13));
+		
+		//Killers
+		game.killers.add(new Killer(19,3,1,1,game));
+		game.killers.add(new Killer(24,3,1,1,game));
+		game.killers.add(new Killer(26,3,1,1,game));
+		game.killers.add(new Killer(18,5,1,1,game));
+		game.killers.add(new Killer(16,6,1,1,game));
+		game.killers.add(new Killer(18,6,1,1,game));
+		game.killers.add(new Killer(25,6,1,1,game));
+		game.killers.add(new Killer(16,7,1,1,game));
+		game.killers.add(new Killer(18,7,1,1,game));
+		game.killers.add(new Killer(16,8,1,1,game));
+		game.killers.add(new Killer(18,8,1,1,game));
+		game.killers.add(new Killer(24,8,1,1,game));
+		game.killers.add(new Killer(26,8,1,1,game));
+		game.killers.add(new Killer(16,9,1,1,game));
+		game.killers.add(new Killer(18,9,1,1,game));
+		game.killers.add(new Killer(16,10,1,1,game));
+		game.killers.add(new Killer(18,10,1,1,game));
+		game.killers.add(new Killer(16,11,1,1,game));
+		game.killers.add(new Killer(25,11,1,1,game));
+		game.killers.add(new Killer(24,12,1,1,game));
+		game.killers.add(new Killer(26,13,1,1,game));
+		game.killers.add(new Killer(25,15,1,1,game));
+		game.killers.add(new Killer(2,16,1,1,game));
+		game.killers.add(new Killer(4,19,1,1,game));
+		game.killers.add(new Killer(11,19,1,1,game));
+		game.killers.add(new Killer(15,19,1,1,game));
+		game.killers.add(new Killer(15,23,1,1,game));
+		game.killers.add(new Killer(16,23,1,1,game));
+		game.killers.add(new Killer(17,23,1,1,game));
+		game.killers.add(new Killer(18,23,1,1,game));
+		
+		//Platforms
+		game.platforms.add(new Platform(1,4,5,1,game));
+		game.platforms.add(new Platform(5,5,2,1,game));
+		game.platforms.add(new Platform(6,6,2,1,game));
+		game.platforms.add(new Platform(7,7,2,1,game));
+		game.platforms.add(new Platform(8,8,8,1,game));
+		game.platforms.add(new Platform(12,1,1,7,game));
+		game.platforms.add(new Platform(13,4,7,1,game));
+		game.platforms.add(new Platform(19,5,1,4,game));
+		game.platforms.add(new Platform(20,8,1,1,game));
+		game.platforms.add(new Platform(23,1,1,15,game));
+		game.platforms.add(new Platform(22,5,1,1,game));
+		game.platforms.add(new Platform(22,11,1,1,game));
+		game.platforms.add(new Platform(15,9,1,3,game));
+		game.platforms.add(new Platform(11,12,12,1,game));
+		game.platforms.add(new Platform(1,8,3,1,game));
+		game.platforms.add(new Platform(3,9,2,1,game));
+		game.platforms.add(new Platform(4,10,2,1,game));
+		game.platforms.add(new Platform(5,11,2,1,game));
+		game.platforms.add(new Platform(6,12,3,1,game));
+		game.platforms.add(new Platform(8,13,1,3,game));
+		game.platforms.add(new Platform(1,15,5,1,game));
+		game.platforms.add(new Platform(1,24,5,1,game));
+		game.platforms.add(new Platform(11,13,1,4,game));
+		game.platforms.add(new Platform(12,16,8,1,game));
+		game.platforms.add(new Platform(19,13,1,14,game));
+		game.platforms.add(new Platform(20,18,7,1,game));
+		game.platforms.add(new Platform(3,20,14,1,game));
+		game.platforms.add(new Platform(9,21,1,4,game));
+		game.platforms.add(new Platform(10,24,9,1,game));
+		game.platforms.add(new Platform(11,25,1,2,game));
+		game.platforms.add(new Platform(15,25,1,2,game));
+		game.platforms.add(new Platform(9,26,1,2,game));
+		game.platforms.add(new Platform(13,26,1,2,game));
+		game.platforms.add(new Platform(17,26,1,2,game));
+		
+		//Elevators
+		game.platforms.add(new ElevatorPlatform(0,12,1,1,game, true, 0, 1, 1));
+		game.platforms.add(new ElevatorPlatform(6,15,2,1,game, false, 15, 19, 2));
+		game.platforms.add(new ElevatorPlatform(24,2,3,1,game, false, 2, 18, 2));
+		game.platforms.add(new ElevatorPlatform(15,23,4,1,game, false, 23, 24, 1));
+		game.platforms.add(new ElevatorPlatform(22,21,1,1,game, true, 22, 23, 2));
+		game.platforms.add(new ElevatorPlatform(26,24,1,1,game, false, 24, 25, 2));
 	}
 }

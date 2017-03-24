@@ -75,18 +75,18 @@ public class ElevatorPlatform extends Platform{
 	
 	public void checkTurn(){
 		if(moveX){
-			if(xVel > 0 && xPos>high){
+			if(xVel > 0 && xPos>=high){
 				xVel = -xVel;
 			}
-			else if (xVel < 0 && xPos<low){
+			else if (xVel < 0 && xPos<=low){
 				xVel = -xVel;
 			}
 		}
 		else{
-			if(yVel > 0 && yPos>high){
+			if(yVel > 0 && yPos>=high){
 				yVel = -yVel;
 			}
-			else if (yVel < 0 && yPos<low){
+			else if (yVel < 0 && yPos<=low){
 				yVel = -yVel;
 			}
 		}
