@@ -61,8 +61,10 @@ public class Data {
 		String line;
 		int counter = 0;
 		while ((line = in.readLine()) != null) {
-			String[] lineData = line.split("~");
-			scores[counter] = new Score(Boolean.parseBoolean(lineData[0]), Integer.parseInt(lineData[1]));
+			if (!line.equals("")) {
+				String[] lineData = line.split("~");
+				scores[counter] = new Score(Boolean.parseBoolean(lineData[0]), Integer.parseInt(lineData[1]));
+			}
 			counter++;
 		}
 		in.close();
@@ -81,8 +83,9 @@ public class Data {
 		BufferedWriter out = new BufferedWriter(stream);
 		for (Score score : scores) {
 			if (score != null) {
-				out.write(score.complete + "~" + score.score + "\n");
+				out.write(score.complete + "~" + score.score);
 			}
+			out.write("\n");
 		}
 		out.flush();
 		out.close();
