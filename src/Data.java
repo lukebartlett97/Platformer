@@ -75,20 +75,19 @@ public class Data {
 		// TODO: Save data to file;
 		OutputStreamWriter stream;
 		try {
-			stream = new OutputStreamWriter(
-					new FileOutputStream(getClass().getResource("/resources/data.txt").getPath()));
+			stream = new OutputStreamWriter(new FileOutputStream(getClass().getResource("/resources/data.txt").getPath()));
+			BufferedWriter out = new BufferedWriter(stream);
+			for (Score score : scores) {
+				if (score != null) {
+					out.write(score.complete + "~" + score.score);
+				}
+				out.write("\n");
+			}
+			out.flush();
+			out.close();
+			stream.close();
 		} catch (FileNotFoundException e) {
 			stream = null;
 		}
-		BufferedWriter out = new BufferedWriter(stream);
-		for (Score score : scores) {
-			if (score != null) {
-				out.write(score.complete + "~" + score.score);
-			}
-			out.write("\n");
-		}
-		out.flush();
-		out.close();
-		stream.close();
 	}
 }
