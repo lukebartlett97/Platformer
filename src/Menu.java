@@ -15,7 +15,7 @@ public class Menu {
 	public JFrame window;
 	public JPanel panel;
 
-	public Menu(JFrame window) throws IOException {
+	public Menu(JFrame window, Data data) throws IOException {
 		// create a new panel with GridBagLayout manager
 		JPanel newPanel = new JPanel(new GridBagLayout());
 		this.window = window;
@@ -28,15 +28,21 @@ public class Menu {
 		// add components to the panel
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-		map1.setVerticalTextPosition(SwingConstants.BOTTOM);
-	    map1.setHorizontalTextPosition(SwingConstants.CENTER);
-		try{
-		    BufferedImage image = ImageIO.read(this.getClass().getResource("/resources/map1.png"));
-		    map1.setIcon(new ImageIcon(image));
+		if (data.getMapScore(1) == null) {
+			map1.setText("Map 1");
+		} else if (data.getMapScore(1).complete) {
+			map1.setForeground(new Color(0, 150, 0));
+			map1.setText("Map 1 (Time Left: " + data.getMapScore(1).score + ")");
+		} else {
+			map1.setText("Map 1 (Coins: " + data.getMapScore(1).score + ")");
 		}
-		catch(IOException e)
-		{
-		    e.printStackTrace();
+		map1.setVerticalTextPosition(SwingConstants.BOTTOM);
+		map1.setHorizontalTextPosition(SwingConstants.CENTER);
+		try {
+			BufferedImage image = ImageIO.read(this.getClass().getResource("/resources/map1.png"));
+			map1.setIcon(new ImageIcon(image));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		map1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -49,16 +55,22 @@ public class Menu {
 		});
 		newPanel.add(map1, constraints);
 		constraints.gridx = 1;
+		if (data.getMapScore(2) == null) {
+			map2.setText("Map 2");
+		} else if (data.getMapScore(2).complete) {
+			map2.setForeground(new Color(0, 150, 0));
+			map2.setText("Map 2 (Time Left: " + data.getMapScore(2).score + ")");
+		} else {
+			map2.setText("Map 2 (Coins: " + data.getMapScore(2).score + ")");
+		}
 
 		map2.setVerticalTextPosition(SwingConstants.BOTTOM);
-	    map2.setHorizontalTextPosition(SwingConstants.CENTER);
-		try{
-		    BufferedImage image = ImageIO.read(this.getClass().getResource("/resources/map2.png"));
-		    map2.setIcon(new ImageIcon(image));
-		}
-		catch(IOException e)
-		{
-		    e.printStackTrace();
+		map2.setHorizontalTextPosition(SwingConstants.CENTER);
+		try {
+			BufferedImage image = ImageIO.read(this.getClass().getResource("/resources/map2.png"));
+			map2.setIcon(new ImageIcon(image));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		map2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,16 +84,22 @@ public class Menu {
 		newPanel.add(map2, constraints);
 		constraints.gridx = 0;
 		constraints.gridy = 1;
+		if (data.getMapScore(3) == null) {
+			map3.setText("Map 3");
+		} else if (data.getMapScore(3).complete) {
+			map3.setForeground(new Color(0, 150, 0));
+			map3.setText("Map 3 (Time Left: " + data.getMapScore(3).score + ")");
+		} else {
+			map3.setText("Map 3 (Coins: " + data.getMapScore(3).score + ")");
+		}
 
 		map3.setVerticalTextPosition(SwingConstants.BOTTOM);
-	    map3.setHorizontalTextPosition(SwingConstants.CENTER);
-		try{
-		    BufferedImage image = ImageIO.read(this.getClass().getResource("/resources/map3.png"));
-		    map3.setIcon(new ImageIcon(image));
-		}
-		catch(IOException e)
-		{
-		    e.printStackTrace();
+		map3.setHorizontalTextPosition(SwingConstants.CENTER);
+		try {
+			BufferedImage image = ImageIO.read(this.getClass().getResource("/resources/map3.png"));
+			map3.setIcon(new ImageIcon(image));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		map3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
